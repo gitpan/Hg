@@ -1,5 +1,5 @@
 use utf8;
-package HG;
+package Hg;
 #ABSTRACT: This module exposes a read-only object oriented interface to local
 #mercurial repositories.
 
@@ -12,7 +12,7 @@ __END__
 
 =head1 NAME
 
-HG - This module exposes a read-only object oriented interface to local
+Hg - This module exposes a read-only object oriented interface to local
 
 =head1 VERSION
 
@@ -20,7 +20,7 @@ version 0.001
 
 =head1 USAGE
 
-    my $repo = HG::Repository->new(
+    my $repo = Hg::Repository->new(
             dir => '/path/to/repository',
             hg => '/optional/path/to/mercurial',
         );

@@ -1,5 +1,5 @@
 use utf8;
-package HG::Revision;
+package Hg::Revision;
 # ABSTRACT: An object representation of a single revision of a mercurial
 # repository.
 
@@ -14,7 +14,7 @@ use Carp;
 
 has 'repository' => (
 	is       => 'ro',
-	isa      => 'HG::Repository',
+	isa      => 'Hg::Repository',
 	required => 1,
 );
 
@@ -154,7 +154,7 @@ __END__
 
 =head1 NAME
 
-HG::Revision - An object representation of a single revision of a mercurial
+Hg::Revision - An object representation of a single revision of a mercurial
 
 =head1 VERSION
 

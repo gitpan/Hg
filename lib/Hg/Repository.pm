@@ -1,5 +1,5 @@
 use utf8;
-package HG::Repository;
+package Hg::Repository;
 #ABSTRACT: This object represents a specific Mercurial repository.
 
 use strict;
@@ -9,7 +9,7 @@ use 5.14.0;
 use Moose;
 
 use Carp;
-use HG::Revision;
+use Hg::Revision;
 
 has dir => (
     is       => 'ro',
@@ -90,7 +90,7 @@ sub revisions {
 
 		push
 			@revisions,
-			HG::Revision->new(
+			Hg::Revision->new(
 				repository => $self,
 				node       => $result);
 	}
@@ -105,7 +105,7 @@ sub revision {
 
 	chomp $result;
 
-	return HG::Revision->new(
+	return Hg::Revision->new(
 		repository => $self,
 		node       => $result);
 }
@@ -138,7 +138,7 @@ __END__
 
 =head1 NAME
 
-HG::Repository - This object represents a specific Mercurial repository.
+Hg::Repository - This object represents a specific Mercurial repository.
 
 =head1 VERSION
 

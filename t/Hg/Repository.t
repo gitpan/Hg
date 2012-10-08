@@ -5,7 +5,7 @@ use 5.12.0;
 use Test::More tests => 29;
 use Test::Exception;
 
-BEGIN { use_ok( 'HG::Repository' ); }
+BEGIN { use_ok( 'Hg::Repository' ); }
 
 my $test_repo = '/tmp/perl-hg-test';
 my $hg        = `which hg`;
@@ -58,7 +58,7 @@ sub commit_repo {
 
 init_test_repo;
 throws_ok {
-    my $repo = HG::Repository->new(
+    my $repo = Hg::Repository->new(
         dir => $test_repo,
         hg => '/not/a/real/path',
     );
@@ -67,7 +67,7 @@ throws_ok {
 
 init_test_repo;
 lives_ok {
-    my $repo = HG::Repository->new(
+    my $repo = Hg::Repository->new(
             dir => $test_repo,
             hg => $hg,
         );
@@ -76,7 +76,7 @@ lives_ok {
 
 init_test_repo;
 throws_ok {
-    my $repo = HG::Repository->new(
+    my $repo = Hg::Repository->new(
             dir => '/not/a/real/repo',
             hg => $hg,
         );
@@ -85,7 +85,7 @@ throws_ok {
 
 init_test_repo;
 lives_ok {
-    my $repo = HG::Repository->new(
+    my $repo = Hg::Repository->new(
             dir => $test_repo,
             hg => $hg,
         );
@@ -93,7 +93,7 @@ lives_ok {
 "The constructor succeeds when given a good repository path";
 
 lives_ok {
-    my $repo = HG::Repository->new(
+    my $repo = Hg::Repository->new(
             dir => $test_repo,
             hg => $hg,
         );
@@ -106,7 +106,7 @@ init_test_repo;
 add_a_file;
 commit_repo;
 lives_ok {
-    my $repo = HG::Repository->new(
+    my $repo = Hg::Repository->new(
             dir => $test_repo,
             hg => $hg,
         );
@@ -114,7 +114,7 @@ lives_ok {
     my $revisions = $repo->revisions;
 
     is( scalar(@{ $revisions }), 1, "Revisions should have one element" );
-    ok( $revisions->[0]->isa('HG::Revision'), "Revisions should be HG::Revision objects" );
+    ok( $revisions->[0]->isa('Hg::Revision'), "Revisions should be Hg::Revision objects" );
 }
 "Fetching a single revision list doesn't throw any errors";
 
@@ -124,7 +124,7 @@ commit_repo;
 edit_a_file;
 commit_repo;
 lives_ok {
-    my $repo = HG::Repository->new(
+    my $repo = Hg::Repository->new(
             dir => $test_repo,
             hg => $hg,
         );
@@ -132,8 +132,8 @@ lives_ok {
     my $revisions = $repo->revisions;
 
     is( scalar(@{ $revisions }), 2, "Revisions should have two elements" );
-    ok( $revisions->[0]->isa('HG::Revision'), "Revisions should be HG::Revision objects" );
-    ok( $revisions->[1]->isa('HG::Revision'), "Revisions should be HG::Revision objects" );
+    ok( $revisions->[0]->isa('Hg::Revision'), "Revisions should be Hg::Revision objects" );
+    ok( $revisions->[1]->isa('Hg::Revision'), "Revisions should be Hg::Revision objects" );
 }
 "Fetching multiple revisions doesn't throw any errors";
 
@@ -143,14 +143,14 @@ commit_repo 'Added';
 edit_a_file;
 commit_repo 'Edited';
 lives_ok {
-    my $repo = HG::Repository->new(
+    my $repo = Hg::Repository->new(
             dir => $test_repo,
             hg => $hg,
         );
 
     my $tip = $repo->tip;
 
-    ok( $tip->isa('HG::Revision'), "Tip is an HG::Revision object" );
+    ok( $tip->isa('Hg::Revision'), "Tip is an Hg::Revision object" );
     is( $tip->description, 'Edited', "The tip description is correct" ); 
 }
 "Fetching the repository tip doesn't throw any errors";
@@ -162,14 +162,14 @@ edit_a_file;
 commit_repo 'Edited';
 update_repo 0;
 lives_ok {
-    my $repo = HG::Repository->new(
+    my $repo = Hg::Repository->new(
             dir => $test_repo,
             hg => $hg,
         );
 
     my $current = $repo->current;
 
-    ok( $current->isa('HG::Revision'), "Current is an HG::Revision object" );
+    ok( $current->isa('Hg::Revision'), "Current is an Hg::Revision object" );
     is( $current->description, 'Added', "The current description is correct" ); 
 }
 "Fetching the current repository state doesn't throw any errors";
@@ -180,14 +180,14 @@ commit_repo 'Added';
 edit_a_file;
 commit_repo 'Edited';
 lives_ok {
-    my $repo = HG::Repository->new(
+    my $repo = Hg::Repository->new(
             dir => $test_repo,
             hg => $hg,
         );
 
     my $rev = $repo->revision(0);
 
-    ok( $rev->isa('HG::Revision'), "Revision is an HG::Revision object" );
+    ok( $rev->isa('Hg::Revision'), "Revision is an Hg::Revision object" );
     is( $rev->description, 'Added', "The revision description is correct" ); 
 }
 "Fetching a specific revision doesn't throw any errors";
@@ -198,7 +198,7 @@ commit_repo 'Added';
 edit_a_file;
 commit_repo 'Edited';
 lives_ok {
-    my $repo = HG::Repository->new(
+    my $repo = Hg::Repository->new(
             dir => $test_repo,
             hg => $hg,
         );
@@ -213,7 +213,7 @@ add_a_file;
 commit_repo 'Added';
 edit_a_file;
 lives_ok {
-    my $repo = HG::Repository->new(
+    my $repo = Hg::Repository->new(
             dir => $test_repo,
             hg => $hg,
         );

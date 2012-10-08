@@ -4,8 +4,8 @@ META.yml
 Makefile.PL
 README
 dist.ini
-lib/HG.pm
-lib/HG/Repository.pm
-lib/HG/Revision.pm
-t/HG/Repository.t
-t/HG/Revision.t
+lib/Hg.pm
+lib/Hg/Repository.pm
+lib/Hg/Revision.pm
+t/Hg/Repository.t
+t/Hg/Revision.t

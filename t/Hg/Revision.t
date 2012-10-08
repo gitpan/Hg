@@ -6,8 +6,8 @@ use Test::More tests => 10;
 use Test::Exception;
 
 BEGIN { 
-	use_ok( 'HG::Repository' );
-	use_ok( 'HG::Revision' );
+	use_ok( 'Hg::Repository' );
+	use_ok( 'Hg::Revision' );
 }
 
 my $test_repo = '/tmp/perl-hg-test';
@@ -60,7 +60,7 @@ sub commit_repo {
 }
 
 dies_ok {
-	my $rev = HG::Repository->new(
+	my $rev = Hg::Repository->new(
 			node => '44f022d9c12867b5bc83ab29f41a33750fdf12d5',
 		);
 }
@@ -70,12 +70,12 @@ init_test_repo;
 add_a_file;
 commit_repo;
 dies_ok {
-    my $repo = HG::Repository->new(
+    my $repo = Hg::Repository->new(
             dir => $test_repo,
             hg => $hg,
         );
 
-	my $rev = HG::Repository->new(
+	my $rev = Hg::Repository->new(
 			repository => $repo,
 		);
 }
@@ -85,7 +85,7 @@ init_test_repo;
 add_a_file;
 commit_repo;
 lives_ok {
-    my $repo = HG::Repository->new(
+    my $repo = Hg::Repository->new(
             dir => $test_repo,
             hg => $hg,
         );
@@ -98,7 +98,7 @@ init_test_repo;
 add_a_file;
 commit_repo;
 lives_ok {
-    my $repo = HG::Repository->new(
+    my $repo = Hg::Repository->new(
             dir => $test_repo,
             hg => $hg,
         );

@@ -15,14 +15,14 @@ my %WriteMakefileArgs = (
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => "6.30"
   },
-  "DISTNAME" => "HG",
+  "DISTNAME" => "Hg",
   "EXE_FILES" => [],
   "LICENSE" => "perl",
-  "NAME" => "HG",
+  "NAME" => "Hg",
   "PREREQ_PM" => {},
   "VERSION" => "0.001",
   "test" => {
-    "TESTS" => "t/HG/*.t"
+    "TESTS" => "t/Hg/*.t"
   }
 );
 
