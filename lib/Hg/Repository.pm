@@ -21,7 +21,15 @@ has hg => (
     is      => 'ro',
     isa     => 'Str',
     default => sub {
-        `which hg`,
+        my $path_hg          = `which hg`;
+        my $bin_hg           = '/bin/hg';
+        my $usr_bin_hg       = '/usr/bin/hg';
+        my $usr_local_bin_hg = '/usr/local/bin/hg';
+
+        return $path_hg          if -x $path_hg;
+        return $bin_hg           if -x $bin_hg;
+        return $usr_bin_hg       if -x $usr_bin_hg;
+        return $usr_local_bin_hg if -x $usr_local_bin_hg;
     },
 );
 
@@ -29,7 +37,7 @@ sub BUILD {
 	my ($self) = @_;
 
     croak "Can't find a working version of Mercurial at ".$self->hg
-        unless -e $self->hg;
+        unless -x $self->hg;
 
 	my $command = $self->hg.' --version';
 	my @version_output = `$command`;
@@ -142,7 +150,7 @@ Hg::Repository - This object represents a specific Mercurial repository.
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 ATTRIBUTES
 

@@ -5,7 +5,7 @@ package Hg::Revision;
 
 use strict;
 use warnings;
-use 5.12.0;
+use 5.14.0;
 
 use Moose;
 use Moose::Util::TypeConstraints;
@@ -158,7 +158,7 @@ Hg::Revision - An object representation of a single revision of a mercurial
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 ATTRIBUTES
 
