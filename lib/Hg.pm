@@ -16,7 +16,7 @@ Hg - This module exposes a read-only object oriented interface to local
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 USAGE
 

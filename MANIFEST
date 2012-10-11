@@ -7,5 +7,5 @@ dist.ini
 lib/Hg.pm
 lib/Hg/Repository.pm
 lib/Hg/Revision.pm
-t/Hg/Repository.t
-t/Hg/Revision.t
+t/10_hg_repository.t
+t/20_hg_revision.t

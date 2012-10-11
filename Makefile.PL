@@ -1,49 +1,32 @@
-
-use strict;
-use warnings;
+use ExtUtils::MakeMaker;
 
 
 
-use ExtUtils::MakeMaker 6.30;
+sub is_hg_installed {
+    my $path_hg = `which hg`;
+    my $bin_hg  = `whereis hg`;
 
+    my $hgs = $path_hg.$bin_hg;
 
+    my @hgs = split(/\n/,$hgs);
 
-my %WriteMakefileArgs = (
-  "ABSTRACT" => "This module exposes a read-only object oriented interface to local",
-  "AUTHOR" => "Robert Ward <robert\@rtward.com>",
-  "BUILD_REQUIRES" => {},
-  "CONFIGURE_REQUIRES" => {
-    "ExtUtils::MakeMaker" => "6.30"
-  },
-  "DISTNAME" => "Hg",
-  "EXE_FILES" => [],
-  "LICENSE" => "perl",
-  "NAME" => "Hg",
-  "PREREQ_PM" => {},
-  "VERSION" => "0.002",
-  "test" => {
-    "TESTS" => "t/Hg/*.t"
-  }
-);
+    my $hg = $hgs[0];
 
-
-unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
-  my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};
-  my $pp = $WriteMakefileArgs{PREREQ_PM};
-  for my $mod ( keys %$br ) {
-    if ( exists $pp->{$mod} ) {
-      $pp->{$mod} = $br->{$mod} if $br->{$mod} > $pp->{$mod};
+    if( -x $hg ) { 
+        return 1;
     }
     else {
-      $pp->{$mod} = $br->{$mod};
+        return 0;
     }
-  }
 }
 
-delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
-  unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
+exit 0 unless is_hg_installed;
 
-WriteMakefile(%WriteMakefileArgs);
-
+WriteMakefile(
+NAME => "My::Module",
+  'CONFIGURE_REQUIRES' => {
+    'ExtUtils::MakeMaker' => '6.30'
+  },
+);
 
 
